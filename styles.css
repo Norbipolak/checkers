@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 10px 0;
+}
+
+.table {
+    /* max-width: 800px; azért, mert 8 sor lesz és 8 oszlop
+    max-height: 800px; */
+    /*
+    de így nem lett annyira jó a max-height meg a max-width-vel ezért sima height meg width lesz, de viszont ott nem px, hanem vh, 
+    hogy flexibilis legyen itt lehet vh vagy vw is használni, csak az a lényeg, hogy mindegyik ugyanakkora legyen 
+    tehát ezt nem lehet, hogy width: 60vw height: 60vh -> csak width: 60vw height: 60vw vagy  width: 60vh height: 60vh
+    */
+    height: 60vw;
+    width: 60vw;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    margin: auto;
+}
+
+.field {
+    border: 1px solid grey;
+    margin: 0 -1px -1px 0;
+    /*
+    így már látszanak a border-ek és nem duplikálódnak 
+    */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*
+a világossal kezdődik a background-color de viszont a második sorban már sötéttel 
+szóval ezt nem lehet megcsinálni, hogy 
+.field:nth-child(even) {
+    background-color: black;
+}
+és akkor a második sor is ugyanolyan színnel kezdődik és itt nekünk ez nem jó 
+tehát csinálunk egy black-bg-t, amit majd hozzáadunk némelyikhez!!!!!
+*/
+.black-bg {
+    background-color: black;
+}
+/*
+ezt az első sorban minden másodikhoz, majd a második sorban minden elsőhőz hozzá kell adni, és így továb felváltva!! 
+első sor így fog kinézni 
+    <div class="table" id="table">
+        <div class="field"></div>
+        <div class="field black-bg"></div>
+        <div class="field"></div>
+        <div class="field black-bg"></div>
+        <div class="field"></div>
+        <div class="field black-bg"></div>
+        <div class="field"></div>
+        <div class="field black-bg"></div>
+    </div>
+
+de majd a table-nek kell adni egy id-t, ami alapján lementjük és majd ide fogjuk appendChild-olni a field-eket, amiket egy for-val ott 
+legenerálunk 
+*/
+
+/*bábuk*/
+.player {
+    width: 90%;
+    height: 90%;
+    /*hogy ne az egész felületét a field-nek töltse ki, hanem csak a 90%-át*/
+    border-radius: 100%; /*ezzel lesznek teljesen kör alakúak a bábúk*/
+}
+/*
+kell kétfajta bábú, mint a sakkban (fekete, fehér illetve itt szürke, sötétszürke, hogy látszodjanak)
+*/
+.black-player {
+    background: rgb(107,107,107);
+    background: radial-gradient(circle, rgba(107,107,107,1) 0%, rgba(46,46,46,1) 100%);
+    border: 1px solid #606060;
+}
+
+.white-player {
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(191,191,191, 1) 100%);
+    border: 1px solid #ffffff;
+}
+
+.highlight {
+    border: 3px solid white;
+}
